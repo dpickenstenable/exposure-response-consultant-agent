@@ -45,67 +45,47 @@ This agent helps security teams:
 
 ---
 
-## 🚀 Installation
+## 🚀 Quick Start
 
-### Prerequisites
+### Installation
 
-- **Claude Code** installed ([claude.ai/code](https://claude.ai/code))
-- **Tenable VM or Tenable One** account
-- **Completed vulnerability scans** (wait 24-48 hours after initial deployment)
-- **API Access Keys** OR **Tenable MCP Server** configured
-- **"Can View" permissions** on Vulnerabilities and Assets in Tenable
+See **[INSTALL.md](INSTALL.md)** for complete installation and usage instructions.
 
-### Method 1: Install from GitHub (Recommended)
-
+**Quick install:**
 ```bash
-# Clone the repository
+cd ~/.claude/agents
 git clone https://github.com/dpickenstenable/exposure-response-consultant-agent.git
-
-# Copy agent to Claude Code agents directory
-cp exposure-response-consultant-agent/agent.md ~/.claude/agents/exposure-response-consultant.md
-
-# Verify installation
-ls -la ~/.claude/agents/exposure-response-consultant.md
+cp exposure-response-consultant-agent/agent.md exposure-response-consultant.md
 ```
 
-### Method 2: Manual Installation
+### How to Use
 
-1. Download `agent.md` from this repository
-2. Place it in your Claude Code agents directory:
-   - **macOS/Linux:** `~/.claude/agents/exposure-response-consultant.md`
-   - **Windows:** `%USERPROFILE%\.claude\agents\exposure-response-consultant.md`
+**You interact with this agent using natural language in Claude Code** - no coding required!
+
+Open Claude Code and simply say:
+```
+Run the Exposure Response Consultant
+```
+
+The agent will analyze your Tenable environment and recommend the top 10 initiatives to focus on.
+
+**Behind the scenes**, Claude Code executes the agent. You don't need to write JavaScript `Agent()` calls or technical commands - just describe what you want in plain English.
 
 ---
 
-## ⚡ Quick Start
+## 📖 Full Documentation
 
-### Using with Tenable MCP Server (Recommended)
+- **[INSTALL.md](INSTALL.md)** - Complete installation and usage guide
+  - What you need
+  - Step-by-step setup
+  - Authentication options
+  - Natural language examples
+  - Complete walkthrough
+  - 10 advanced usage scenarios
+  - Troubleshooting
+  - Security & privacy
 
-```
-In Claude Code:
-> Run the Exposure Response Consultant
-```
-
-The agent will:
-1. Analyze your vulnerability landscape (critical/high findings)
-2. Identify patterns (crown jewels, volume issues, EOL software, legacy protocols)
-3. Calculate impact scores for potential initiatives
-4. Recommend top 10 initiatives ranked by business impact
-5. Offer to create initiative-scoping tags automatically
-6. Generate comprehensive reports for implementation
-
-### Using with Direct API Authentication
-
-```bash
-export TENABLE_ACCESS_KEY="your_access_key"
-export TENABLE_SECRET_KEY="your_secret_key"
-export TENABLE_URL="https://cloud.tenable.com"
-```
-
-Then run:
-```
-> Run the Exposure Response Consultant
-```
+- **[README.md](README.md)** - This file (overview and technical details)
 
 ---
 
