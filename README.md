@@ -1,4 +1,4 @@
-# Exposure Response Consultant Agent
+# Exposure Response Consultant
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blue)](https://claude.ai/code)
@@ -8,9 +8,9 @@
 
 ## 🎯 Overview
 
-The **Exposure Response Consultant Agent** is a strategic vulnerability management advisor that transforms overwhelming scan data into a clear, prioritized action plan. After your initial Tenable vulnerability scans complete, this agent analyzes 10,000+ assets and thousands of findings to recommend the 10 most impactful Exposure Response Initiatives—complete with business justification, affected assets, success metrics, and implementation timelines.
+The **Exposure Response Consultant** is a strategic vulnerability management advisor that transforms overwhelming scan data into a clear, prioritized action plan. After your initial Tenable vulnerability scans complete, this skill analyzes 10,000+ assets and thousands of findings to recommend the 10 most impactful Exposure Response Initiatives—complete with business justification, affected assets, success metrics, and implementation timelines.
 
-This agent helps security teams:
+This skill helps security teams:
 - 🎯 **Focus on what matters** - Prioritize remediation based on business risk, not just CVE severity
 - ⚡ **Get started fast** - From scan completion to action plan in minutes
 - 💼 **Align with business** - Every recommendation maps to business impact
@@ -53,23 +53,23 @@ See **[INSTALL.md](INSTALL.md)** for complete installation and usage instruction
 
 **Quick install:**
 ```bash
-cd ~/.claude/agents
+mkdir -p ~/.claude/skills/exposure-response-consultant
 git clone https://github.com/dpickenstenable/exposure-response-consultant-agent.git
-cp exposure-response-consultant-agent/agent.md exposure-response-consultant.md
+cp -R exposure-response-consultant-agent/exposure-response-consultant/* ~/.claude/skills/exposure-response-consultant/
 ```
 
 ### How to Use
 
-**You interact with this agent using natural language in Claude Code** - no coding required!
+**You invoke the skill using natural language in Claude Code** - no coding required!
 
 Open Claude Code and simply say:
 ```
-Run the Exposure Response Consultant
+/exposure-response-consultant
 ```
 
-The agent will analyze your Tenable environment and recommend the top 10 initiatives to focus on.
+The skill will analyze your Tenable environment and recommend the top 10 initiatives to focus on.
 
-**Behind the scenes**, Claude Code executes the agent. You don't need to write JavaScript `Agent()` calls or technical commands - just describe what you want in plain English.
+**Behind the scenes**, Claude Code executes the skill. You don't need to write any code or technical commands - just describe what you want in plain English.
 
 ---
 
@@ -93,7 +93,7 @@ The agent will analyze your Tenable environment and recommend the top 10 initiat
 
 ### Phase 1: Vulnerability Landscape Analysis
 
-The agent performs comprehensive intelligence gathering:
+The skill performs comprehensive intelligence gathering:
 
 **Data Collection:**
 - Critical vulnerabilities (severity = critical)
@@ -137,7 +137,7 @@ Business Risk Factors:
 
 ### Phase 3: Implementation Support
 
-**Since Tenable doesn't support programmatic initiative creation via API**, the agent provides:
+**Since Tenable doesn't support programmatic initiative creation via API**, the skill provides:
 
 1. **Tag-Based Scoping** - Creates tags and applies to assets so you can filter in Tenable UI
 2. **Creation Checklist** - Step-by-step instructions for each initiative
@@ -148,7 +148,7 @@ Business Risk Factors:
 
 ## 🏷️ Initiative Types
 
-The agent identifies 10 common initiative archetypes:
+The skill identifies 10 common initiative archetypes:
 
 ### 1. Crown Jewel Protection
 **Focus:** Highest AES assets (Domain Controllers, Exchange, Databases)  
@@ -207,9 +207,9 @@ The agent identifies 10 common initiative archetypes:
 ### Example 1: First-Time Setup After Initial Scans
 
 ```
-User: "Run the Exposure Response Consultant"
+User: "/exposure-response-consultant"
 
-Agent:
+Skill:
 ✓ Retrieved 1,783 critical vulnerabilities
 ✓ Retrieved 10,875 assets
 ✓ Identified 5 crown jewel assets (AES 900+)
@@ -250,7 +250,7 @@ What would you like to do?
 ```
 User: "Create the tags"
 
-Agent:
+Skill:
 Creating initiative-scoping tags in Tenable...
 
 ✓ Created tag category: "Initiative"
@@ -285,9 +285,9 @@ I've also generated a comprehensive report at:
 ### Example 3: Quarterly Re-Assessment
 
 ```
-User: "Run the consultant again—it's been 3 months"
+User: "/exposure-response-consultant again—it's been 3 months"
 
-Agent:
+Skill:
 Re-analyzing your environment...
 
 ✓ Retrieved 1,245 critical vulnerabilities (↓538 from last run!)
@@ -314,7 +314,7 @@ Would you like to create initiatives for these new patterns?
 
 ## 🎨 Output Formats
 
-The agent supports multiple output formats:
+The skill supports multiple output formats:
 
 ### 1. Interactive Console
 Real-time analysis presented in the conversation with approval workflow.
@@ -463,9 +463,9 @@ curl -H "X-ApiKeys: accessKey=$TENABLE_ACCESS_KEY; secretKey=$TENABLE_SECRET_KEY
 **Cause:** Business risk factors may not match your environment
 
 **Solution:**
-- Adjust business risk factors in the agent (edit agent.md)
+- Adjust business risk factors in the skill (edit SKILL.md)
 - Provide feedback: "I think production apps should be scored higher than 85"
-- Agent will recalculate with adjusted weights
+- The skill will recalculate with adjusted weights
 
 ---
 
@@ -560,4 +560,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Made with ❤️ for the Tenable community**
 
-Transform vulnerability data into strategic action. If this agent helps your remediation program, please ⭐ star the repository!
+Transform vulnerability data into strategic action. If this skill helps your remediation program, please ⭐ star the repository!
