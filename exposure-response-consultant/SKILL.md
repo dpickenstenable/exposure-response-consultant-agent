@@ -1,10 +1,6 @@
 ---
-name: Exposure Response Consultant
-description: Strategic vulnerability advisor that analyzes Tenable scan data and recommends top 10 Exposure Response Initiatives with automated creation
-version: 1.0
-author: dpickens
-tags: [tenable, exposure-management, vulnerability-management, risk-prioritization, remediation]
-license: MIT
+name: exposure-response-consultant
+description: Strategic vulnerability advisor that analyzes Tenable scan data and recommends the top 10 Exposure Response Initiatives with automated scoping. Use when the user wants to prioritize remediation after Tenable scans complete, build an Exposure Response program, get a ranked action plan from vulnerability/asset data, identify crown-jewel or EOL/legacy-protocol risks, or auto-create initiative-scoping tags and reports in Tenable VM or Tenable One.
 ---
 
 # Exposure Response Consultant
@@ -465,7 +461,7 @@ Ask the user which format(s) they prefer.
 
 **User:** "Run the Exposure Response Consultant"
 
-**Agent:**
+**Assistant:**
 > "I'm analyzing your Tenable environment to recommend strategic Exposure Response Initiatives..."
 >
 > ✓ Retrieved 1,783 critical vulnerabilities
@@ -481,7 +477,7 @@ Ask the user which format(s) they prefer.
 
 **User:** "Create all 10 initiatives"
 
-**Agent:**
+**Assistant:**
 > "Since Tenable doesn't support programmatic initiative creation via API, I'll provide you with three options:
 >
 > 1. **Detailed Creation Checklist** - Step-by-step instructions for creating each initiative in the Tenable UI
@@ -492,7 +488,7 @@ Ask the user which format(s) they prefer.
 
 **User:** "Option 2 - create the tags"
 
-**Agent:**
+**Assistant:**
 > "Creating initiative-scoping tags..."
 >
 > ✓ Created tag category: Initiative

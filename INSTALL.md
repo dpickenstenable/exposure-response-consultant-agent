@@ -1,6 +1,6 @@
 # Installation & Usage Guide
 
-This guide explains how to install and run the Exposure Response Consultant agent in Claude Code.
+This guide explains how to install and invoke the Exposure Response Consultant skill in Claude Code.
 
 ## What You Need
 
@@ -9,7 +9,7 @@ This guide explains how to install and run the Exposure Response Consultant agen
 3. **API Access** - Either Tenable MCP Server OR Tenable API keys
 4. **Permissions** - "Can View" access to Vulnerabilities and Assets in Tenable
 
-## What This Agent Does
+## What This Skill Does
 
 The Exposure Response Consultant is your AI-powered vulnerability strategist. After your initial Tenable scans complete, it analyzes thousands of vulnerabilities and assets to recommend the 10 most impactful Exposure Response Initiatives. Think of it as having a vulnerability management expert review your entire environment and create a prioritized action plan in minutes.
 
@@ -26,35 +26,35 @@ The Exposure Response Consultant is your AI-powered vulnerability strategist. Af
 
 ```bash
 # Clone the repository
-cd ~/.claude/agents
 git clone https://github.com/dpickenstenable/exposure-response-consultant-agent.git
 
-# Copy the agent definition
-cp exposure-response-consultant-agent/agent.md ~/.claude/agents/exposure-response-consultant.md
+# Copy the skill definition
+mkdir -p ~/.claude/skills/exposure-response-consultant
+cp -R exposure-response-consultant-agent/exposure-response-consultant/* ~/.claude/skills/exposure-response-consultant/
 
 # Verify installation
-ls -la ~/.claude/agents/exposure-response-consultant.md
+ls -la ~/.claude/skills/exposure-response-consultant/SKILL.md
 ```
 
 ### Option 2: Manual Installation
 
-1. Download the `agent.md` file from this repository
-2. Save it to your Claude Code agents directory:
-   - **macOS/Linux:** `~/.claude/agents/exposure-response-consultant.md`
-   - **Windows:** `%USERPROFILE%\.claude\agents\exposure-response-consultant.md`
+1. Download the entire `exposure-response-consultant/` directory (including `SKILL.md` and any bundled files) from this repository
+2. Save its contents to your Claude Code skills directory:
+   - **macOS/Linux:** `~/.claude/skills/exposure-response-consultant/`
+   - **Windows:** `%USERPROFILE%\.claude\skills\exposure-response-consultant\`
 
 ## Pre-Installation Setup
 
 ### Step 1: Ensure Scans Are Complete
 
-The agent needs vulnerability data to analyze. Before running:
+The skill needs vulnerability data to analyze. Before invoking:
 
 1. Log into your Tenable instance (cloud.tenable.com or your on-prem URL)
 2. Navigate to **Scans** and verify scans have completed
 3. Wait 24-48 hours after initial Tenable deployment for full coverage
 4. Check that you have both critical and high severity vulnerabilities detected
 
-**Why wait?** The agent analyzes patterns across your entire environment. Incomplete scan coverage leads to incomplete recommendations.
+**Why wait?** The skill analyzes patterns across your entire environment. Incomplete scan coverage leads to incomplete recommendations.
 
 ### Step 2: Set Up Authentication
 
@@ -62,7 +62,7 @@ Choose one of two authentication methods:
 
 #### Method A: Tenable MCP Server (Recommended)
 
-If you have the Tenable MCP Server configured, the agent will automatically use it.
+If you have the Tenable MCP Server configured, the skill will automatically use it.
 
 **Benefits:**
 - Automatic authentication
@@ -94,9 +94,9 @@ $env:TENABLE_URL="https://cloud.tenable.com"
 4. Copy both Access Key and Secret Key
 5. **Required Permissions:** Can View Vulnerabilities, Can View Assets
 
-## How to Run the Agent
+## How to Invoke the Skill
 
-The agent runs inside Claude Code conversations. You interact with it using natural language.
+The skill runs inside Claude Code conversations. You invoke it using natural language.
 
 ### Step 1: Start Claude Code
 
@@ -105,26 +105,26 @@ Open Claude Code in your preferred interface:
 - **Desktop:** Launch the Claude Code app
 - **Web:** Visit claude.ai/code
 
-### Step 2: Run the Agent with Natural Language
+### Step 2: Invoke the Skill with Natural Language
 
 In the Claude Code conversation, simply type:
 
 ```
-Run the Exposure Response Consultant
+/exposure-response-consultant
 ```
 
 Or be more specific:
 
 ```
-Use the Exposure Response Consultant agent to analyze my Tenable environment
+Use /exposure-response-consultant to analyze my Tenable environment
 and recommend the top 10 initiatives to focus on
 ```
 
-**Behind the scenes**, Claude Code will execute the agent. You don't need to write any JavaScript or technical commands.
+**Behind the scenes**, Claude Code will execute the skill. You don't need to write any JavaScript or technical commands.
 
 ### Using Opus Model for More Thorough Analysis
 
-By default, agents run with the Sonnet model. For more comprehensive, thorough analysis, you can upgrade to the **Opus model with high effort**.
+By default, skills run with the Sonnet model. For more comprehensive, thorough analysis, you can upgrade to the **Opus model with high effort**.
 
 **When to use Opus:**
 - Creating comprehensive Exposure Response Initiatives, quarterly strategic planning, executive reporting, audit preparation
@@ -135,12 +135,12 @@ By default, agents run with the Sonnet model. For more comprehensive, thorough a
 
 **How to use Opus:**
 
-In your Claude Code conversation, specify the model before invoking the agent:
+In your Claude Code conversation, specify the model before invoking the skill:
 
 ```
 Switch to Opus model
 
-Then run the Exposure Response Consultant with detailed initiative recommendations
+Then use /exposure-response-consultant with detailed initiative recommendations
 ```
 
 **Or use the direct command:**
@@ -148,7 +148,7 @@ Then run the Exposure Response Consultant with detailed initiative recommendatio
 ```
 /model opus
 
-Run the Exposure Response Consultant with detailed initiative recommendations
+/exposure-response-consultant with detailed initiative recommendations
 ```
 
 **What changes with Opus + high effort:**
@@ -168,8 +168,8 @@ Run the Exposure Response Consultant with detailed initiative recommendations
 
 ### What Happens Next
 
-1. **Agent starts** - Claude Code spawns the Exposure Response Consultant
-2. **Data collection** - Agent retrieves vulnerabilities and assets from Tenable
+1. **Skill starts** - Claude Code invokes the Exposure Response Consultant
+2. **Data collection** - The skill retrieves vulnerabilities and assets from Tenable
 3. **Pattern analysis** - Identifies crown jewels, volume issues, EOL software, etc.
 4. **Impact scoring** - Calculates which initiatives have the highest impact
 5. **Recommendations** - Presents top 10 initiatives with business justification
@@ -191,12 +191,12 @@ Run the Exposure Response Consultant with detailed initiative recommendations
 claude
 ```
 
-**Step 2: Run the agent**
+**Step 2: Invoke the skill**
 ```
-Run the Exposure Response Consultant to help me prioritize remediation
+/exposure-response-consultant to help me prioritize remediation
 ```
 
-**Step 3: Agent analyzes your environment**
+**Step 3: The skill analyzes your environment**
 ```
 Analyzing Tenable environment...
 
@@ -212,7 +212,7 @@ Analysis complete!
 
 **Step 4: Review top 10 recommendations**
 
-The agent presents a prioritized list:
+The skill presents a prioritized list:
 
 | # | Initiative | Priority | Assets | Risk | Timeline |
 |---|-----------|----------|--------|------|----------|
@@ -230,7 +230,7 @@ Each initiative includes:
 
 **Step 5: Choose how to proceed**
 
-The agent asks:
+The skill asks:
 ```
 What would you like to do?
 1. Create initiative-scoping tags (recommended)
@@ -244,7 +244,7 @@ What would you like to do?
 Create the tags
 ```
 
-The agent:
+The skill:
 - Creates tag category "Initiative"
 - Creates 10 tag values (one per initiative)
 - Applies tags to all affected assets
@@ -255,7 +255,7 @@ The agent:
 Export the report
 ```
 
-The agent generates:
+The skill generates:
 - `Exposure-Response-Initiatives-2026-06-23.md` - Full details
 - `Exposure-Response-Initiatives-2026-06-23.html` - Executive dashboard
 - Asset lists for each initiative
@@ -265,17 +265,17 @@ The agent generates:
 Give me the creation checklist
 ```
 
-The agent provides step-by-step instructions for creating each initiative manually in the Tenable UI.
+The skill provides step-by-step instructions for creating each initiative manually in the Tenable UI.
 
 ## Advanced Usage Examples
 
 ### Example 1: Quarterly Re-Assessment
 
 ```
-Run the Exposure Response Consultant again - it's been 3 months since last run
+/exposure-response-consultant again - it's been 3 months since last run
 ```
 
-The agent will:
+The skill will:
 - Compare current state to baseline
 - Show progress on previous initiatives
 - Recommend new initiatives for evolved landscape
@@ -284,11 +284,11 @@ The agent will:
 ### Example 2: Focus on Specific Compliance
 
 ```
-Run the Exposure Response Consultant with focus on PCI DSS compliance.
+/exposure-response-consultant with focus on PCI DSS compliance.
 We have an audit in 60 days.
 ```
 
-The agent will:
+The skill will:
 - Prioritize PCI-relevant vulnerabilities
 - Focus on in-scope assets
 - Recommend initiatives that address PCI requirements
@@ -297,12 +297,12 @@ The agent will:
 ### Example 3: Crown Jewel Protection Only
 
 ```
-Use the Exposure Response Consultant to focus on our crown jewels:
+Use /exposure-response-consultant to focus on our crown jewels:
 domain controllers, Exchange servers, and production databases.
 Ignore everything else for now.
 ```
 
-The agent will:
+The skill will:
 - Filter to high-AES assets matching those functions
 - Recommend targeted initiatives for those systems
 - Provide deep-dive analysis on critical infrastructure
@@ -310,11 +310,11 @@ The agent will:
 ### Example 4: After-Hours Maintenance Window Planning
 
 ```
-Run the Exposure Response Consultant and group initiatives by
+/exposure-response-consultant and group initiatives by
 whether they require downtime or can be patched live
 ```
 
-The agent will:
+The skill will:
 - Classify initiatives by disruption level
 - Separate no-downtime vs. maintenance-window initiatives
 - Recommend patching sequences to minimize impact
@@ -322,11 +322,11 @@ The agent will:
 ### Example 5: Executive Presentation
 
 ```
-Run the Exposure Response Consultant and generate an HTML dashboard
+/exposure-response-consultant and generate an HTML dashboard
 suitable for presenting to the CISO
 ```
 
-The agent will:
+The skill will:
 - Create visual executive summary
 - Emphasize business risk reduction
 - Show ROI metrics (AES reduction per initiative)
@@ -335,11 +335,11 @@ The agent will:
 ### Example 6: Integration with Patch Management
 
 ```
-Use the Exposure Response Consultant to identify which initiatives
+Use /exposure-response-consultant to identify which initiatives
 can be handled by our existing WSUS/SCCM infrastructure
 ```
 
-The agent will:
+The skill will:
 - Tag Windows patch campaigns separately
 - Identify which initiatives require manual remediation
 - Suggest automation opportunities
@@ -347,11 +347,11 @@ The agent will:
 ### Example 7: Resource-Constrained Environment
 
 ```
-Run the Exposure Response Consultant but we only have 2 security engineers.
+/exposure-response-consultant but we only have 2 security engineers.
 Focus on high-impact, low-effort initiatives first.
 ```
 
-The agent will:
+The skill will:
 - Prioritize quick wins (browser updates, simple patches)
 - Defer complex initiatives (EOL migrations, architecture changes)
 - Suggest a realistic 90-day roadmap
@@ -363,7 +363,7 @@ We just had a breach involving domain controllers. Run the Exposure Response
 Consultant with extra focus on authentication and access control vulnerabilities.
 ```
 
-The agent will:
+The skill will:
 - Prioritize identity-related vulnerabilities
 - Focus on Active Directory, Kerberos, authentication services
 - Recommend emergency response initiatives
@@ -371,11 +371,11 @@ The agent will:
 ### Example 9: Multi-Cloud Environment
 
 ```
-Run the Exposure Response Consultant for our hybrid cloud environment.
+/exposure-response-consultant for our hybrid cloud environment.
 We have AWS, Azure, and on-prem assets.
 ```
 
-The agent will:
+The skill will:
 - Group initiatives by cloud provider
 - Identify cloud-specific vulnerabilities
 - Recommend platform-specific remediation strategies
@@ -383,11 +383,11 @@ The agent will:
 ### Example 10: DevOps Integration
 
 ```
-Use the Exposure Response Consultant to identify initiatives that
+Use /exposure-response-consultant to identify initiatives that
 should be integrated into our CI/CD pipeline vs. handled by ops
 ```
 
-The agent will:
+The skill will:
 - Separate infrastructure patching from application vulns
 - Suggest which initiatives benefit from automation
 - Recommend shift-left opportunities
@@ -403,7 +403,7 @@ The agent will:
 
 ### Impact Score Calculation
 
-The agent uses this formula:
+The skill uses this formula:
 ```
 Impact Score = (Asset Count × 0.3) + (Avg AES × 0.4) + (Business Risk × 0.3)
 
@@ -435,22 +435,22 @@ Higher scores = more impactful initiatives.
 
 ## Troubleshooting
 
-### Issue: "Agent not found"
+### Issue: "Skill not found"
 
-**Problem:** The agent isn't installed correctly.
+**Problem:** The skill isn't installed correctly.
 
 **Solution:**
 ```bash
 # Verify the file exists
-ls -la ~/.claude/agents/exposure-response-consultant.md
+ls -la ~/.claude/skills/exposure-response-consultant/SKILL.md
 
 # Check the frontmatter name field
-head -10 ~/.claude/agents/exposure-response-consultant.md
+head -10 ~/.claude/skills/exposure-response-consultant/SKILL.md
 
 # If missing, reinstall
-cd ~/.claude/agents
 git clone https://github.com/dpickenstenable/exposure-response-consultant-agent.git
-cp exposure-response-consultant-agent/agent.md exposure-response-consultant.md
+mkdir -p ~/.claude/skills/exposure-response-consultant
+cp -R exposure-response-consultant-agent/exposure-response-consultant/* ~/.claude/skills/exposure-response-consultant/
 ```
 
 ### Issue: "No vulnerabilities found"
@@ -504,7 +504,7 @@ echo $TENABLE_SECRET_KEY
 
 **Solution:**
 ```
-Tell the agent:
+Tell the skill:
 "I think production apps should be scored higher than 85. Can you recalculate?"
 
 Or:
@@ -512,7 +512,7 @@ Or:
 "Network devices are more critical in our environment. Adjust the scoring."
 ```
 
-The agent will recalculate impact scores with your adjusted weights.
+The skill will recalculate impact scores with your adjusted weights.
 
 ### Issue: "Tag creation failed - permission denied"
 
@@ -523,13 +523,13 @@ The agent will recalculate impact scores with your adjusted weights.
 2. Request "Can Manage" under Tags in Access Control
 3. Navigate to: Settings → Access Control → Groups → [Your Group]
 4. Enable "Can Manage" for Tags
-5. Retry the agent
+5. Retry the skill
 
 ## Security & Privacy
 
 ### Data Access
 
-The agent only reads data from Tenable:
+The skill only reads data from Tenable:
 - Vulnerability lists
 - Asset inventory
 - Existing tags
@@ -542,7 +542,7 @@ It does **NOT**:
 
 ### Tag Creation
 
-If you approve tag creation, the agent will:
+If you approve tag creation, the skill will:
 - Create new tag categories and values
 - Apply tags to assets
 
@@ -610,7 +610,7 @@ Generated reports contain:
 
 ❌ **Don't forget change control** - Document and approve production changes
 
-❌ **Don't try to run the JavaScript Agent() code yourself** - Let Claude Code handle it
+❌ **Don't try to run any code yourself** - Let Claude Code handle it when you invoke the skill
 
 ## Next Steps After Running
 
@@ -635,7 +635,7 @@ Generated reports contain:
 **Ready to start?** Open Claude Code and say:
 
 ```
-Run the Exposure Response Consultant
+/exposure-response-consultant
 ```
 
-The agent will handle the rest!
+The skill will handle the rest!
