@@ -32,8 +32,8 @@ This skill helps security teams:
 
 ## 📋 Table of Contents
 
-- [Installation](#-installation)
 - [Quick Start](#-quick-start)
+- [Authentication & Configuration](#-authentication--configuration)
 - [How It Works](#-how-it-works)
 - [Initiative Types](#-initiative-types)
 - [Usage Examples](#-usage-examples)
@@ -49,14 +49,25 @@ This skill helps security teams:
 
 ### Installation
 
-See **[INSTALL.md](INSTALL.md)** for complete installation and usage instructions.
+Claude Code skills are installed by copying the skill into `~/.claude/skills/<skill-name>/` so that `~/.claude/skills/exposure-response-consultant/SKILL.md` exists.
 
-**Quick install:**
+**Prerequisites:**
+- **Claude Code** (CLI, desktop, or web at claude.ai/code)
+- **Tenable access** via the Tenable MCP Server or Tenable API keys (see [Authentication & Configuration](#-authentication--configuration))
+
 ```bash
-mkdir -p ~/.claude/skills/exposure-response-consultant
+# 1. Clone this repository
 git clone https://github.com/dpickenstenable/exposure-response-consultant-agent.git
-cp -R exposure-response-consultant-agent/exposure-response-consultant/* ~/.claude/skills/exposure-response-consultant/
+
+# 2. Copy the skill so that ~/.claude/skills/exposure-response-consultant/SKILL.md exists
+mkdir -p ~/.claude/skills/exposure-response-consultant
+cp -r exposure-response-consultant-agent/exposure-response-consultant/* ~/.claude/skills/exposure-response-consultant/
+
+# 3. Verify
+ls ~/.claude/skills/exposure-response-consultant/SKILL.md
 ```
+
+Restart Claude Code (or start a new session) so it picks up the new skill.
 
 ### How to Use
 
@@ -73,19 +84,31 @@ The skill will analyze your Tenable environment and recommend the top 10 initiat
 
 ---
 
-## 📖 Full Documentation
+## 🔐 Authentication & Configuration
 
-- **[INSTALL.md](INSTALL.md)** - Complete installation and usage guide
-  - What you need
-  - Step-by-step setup
-  - Authentication options
-  - Natural language examples
-  - Complete walkthrough
-  - 10 advanced usage scenarios
-  - Troubleshooting
-  - Security & privacy
+The skill needs read access to your Tenable vulnerability and asset data. Choose one of two methods:
 
-- **[README.md](README.md)** - This file (overview and technical details)
+### Method A: Tenable MCP Server (Recommended)
+
+If the [Tenable MCP Server](https://github.com/tenable/mcp-server-tenable) is configured, the skill uses it automatically—no credential management needed.
+
+### Method B: Direct API keys
+
+If MCP is unavailable, set these environment variables before starting Claude Code:
+
+```bash
+# macOS/Linux
+export TENABLE_ACCESS_KEY="your_access_key_here"
+export TENABLE_SECRET_KEY="your_secret_key_here"
+export TENABLE_URL="https://cloud.tenable.com"   # or cloud.eu.tenable.com
+
+# Windows PowerShell
+$env:TENABLE_ACCESS_KEY="your_access_key_here"
+$env:TENABLE_SECRET_KEY="your_secret_key_here"
+$env:TENABLE_URL="https://cloud.tenable.com"
+```
+
+Generate API keys in Tenable under **Settings → My Account → API Keys**. Required permissions: **Can View** for Vulnerabilities and Assets (plus **Can Manage** for Tags if you want the skill to create initiative-scoping tags).
 
 ---
 
